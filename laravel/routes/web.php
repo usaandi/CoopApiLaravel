@@ -11,10 +11,9 @@
 |
 */
 
-Route::get('/', function () {
+/*Route::get('/', function () {
     return view('welcome');
-});
-Route::get('', function () {
-    $curl = curl_init('https://ecoop.ee/api/v1/products?page=1');
+});*/
+Route::get('/', 'Controller@test');
 
-});
+

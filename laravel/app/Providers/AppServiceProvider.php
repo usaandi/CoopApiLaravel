@@ -16,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(coopService::class, function () {
-
+            return new coopService(new Client());
         });
     }
 

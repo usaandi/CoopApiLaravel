@@ -28,7 +28,6 @@ class coopService
     {
         $this->client = $client;
     }
-
     public function page($pageNumber)
     {
         $data = $this->getPageData($pageNumber);
@@ -37,7 +36,6 @@ class coopService
             return \GuzzleHttp\json_decode($data);
         }
     }
-
     /**
      *
      * @param $page
