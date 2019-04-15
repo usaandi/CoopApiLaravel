@@ -9,32 +9,45 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 
+/**
+ * Class ProcessPage
+ * @package App\Jobs
+ */
 class ProcessPage implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    /**
-     * @var coopService
-     */
-    protected $coopService;
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct(coopService $coop)
+    protected $pageNumber;
+
+
+    public function __construct($pageNumber)
     {
-        $this->coopService = $coop;
+
+        $this->pageNumber = $pageNumber;
     }
 
     /**
-     * Execute the job.
-     *
-     * @return void
+     * @return mixed
      */
-    public function handle()
+    public function getPageNumber()
     {
-        //
+        return $this->pageNumber;
+    }
+
+    /**
+     * @param mixed $pageNumber
+     */
+    public function setPageNumber($pageNumber): void
+    {
+        $this->pageNumber = $pageNumber;
+    }
+
+
+    public function handle(coopService $coopApiService)
+    {
+        $data = $coopApiService->page($this->getPageNumber());
+
+
     }
 }

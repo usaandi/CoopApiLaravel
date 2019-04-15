@@ -4,7 +4,6 @@ namespace App\Providers;
 
 use App\Services\coopService;
 use Illuminate\Support\ServiceProvider;
-use GuzzleHttp\Client;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -16,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
     public function register()
     {
         $this->app->bind(coopService::class, function () {
-            return new coopService(new Client());
+            return new coopService();
         });
     }
 

@@ -14,6 +14,6 @@
 /*Route::get('/', function () {
     return view('welcome');
 });*/
-Route::get('/', 'Controller@test');
+Route::get('/', 'Controller@pageInfo');
 
 

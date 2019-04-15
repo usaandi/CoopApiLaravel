@@ -13,21 +13,26 @@ use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Cache;
 
+/**
+ * Class coopService
+ * @package App\Services
+ */
 class coopService
 {
     /**
      * @var Client
      */
-    private $client;
+    protected $client;
 
     /**
      * coopService constructor.
-     * @param Client $client ,
+     *
      */
-    public function __construct(Client $client)
+    public function __construct()
     {
-        $this->client = $client;
+        $this->client = new Client(['base_uri' => 'https://ecoop.ee/api/v1/products']);
     }
+
     public function page($pageNumber)
     {
         $data = $this->getPageData($pageNumber);
@@ -35,7 +40,9 @@ class coopService
         if ($data !== null) {
             return \GuzzleHttp\json_decode($data);
         }
+        return null;
     }
+
     /**
      *
      * @param $page
@@ -45,33 +52,40 @@ class coopService
     {
         if (Cache::has($page)) {
             return (Cache::get($page));
-        } else {
-            return null;
         }
+        return null;
+
     }
 
     protected function storeCache($page, $data)
     {
-        Cache::put($page, $data, now()->addHours(48));
+        Cache::put($page, $data, now()->addHours(1));
         return Cache::get($page);
 
     }
 
     protected function getPageData($pageNumber)
     {
+
+        $params = [
+            'query' => [
+                'page' => $pageNumber
+            ]];
+
         $dataFromCache = null;
         if ($pageNumber) {
             $dataFromCache = $this->getCache($pageNumber);
             if ($dataFromCache !== null) {
+                echo 'cache1';
                 return $dataFromCache;
             } else {
-                $response = $this->client->get('https://ecoop.ee/api/v1/products?page=' . $pageNumber);
+                echo 'response';
+                $response = $this->client->request('GET', '', $params);
                 $data = $response->getBody()->getContents();
-
                 return $dataFromCache = $this->storeCache($pageNumber, $data);
             }
         }
-        return null;
+        return $dataFromCache;
 
     }
 
