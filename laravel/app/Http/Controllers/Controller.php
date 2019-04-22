@@ -45,22 +45,7 @@ class Controller extends BaseController
 
     public function pageInfo(coopService $coopService)
     {
-        $arrayData = [];
         $data = $coopService->page($this->getCurrentPage());
-        foreach ($data->results as $product) {
-            $imageUrl = $product->images[0]->productimage;
-            $arrayData  [] = [
-                'name' => $product->name,
-                'content_quantity' => $product->content_quantity,
-                'weight_count_unit' => $product->weight_count_unit,
-                'measure_unit' => $product->measure_unit,
-                'brand_name' => $product->brand_name,
-                'sell_price' => $product->sell_price,
-                'productimage_url' => $imageUrl,
-
-            ];
-        };
-        dd($arrayData);
 
 
         $itemCount = $data->count;
@@ -70,7 +55,7 @@ class Controller extends BaseController
         if ($maxPage !== null) {
             for ($i = 1; $i <= $maxPage; $i++) {
                 $this->setCurrentPage($i);
-                //ProcessPage::dispatch($this->getCurrentPage());
+                ProcessPage::dispatch($this->getCurrentPage());
             }
         }
 

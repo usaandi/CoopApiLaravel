@@ -76,10 +76,10 @@ class coopService
         if ($pageNumber) {
             $dataFromCache = $this->getCache($pageNumber);
             if ($dataFromCache !== null) {
-                echo 'cache1';
+
                 return $dataFromCache;
             } else {
-                echo 'response';
+
                 $response = $this->client->request('GET', '', $params);
                 $data = $response->getBody()->getContents();
                 return $dataFromCache = $this->storeCache($pageNumber, $data);

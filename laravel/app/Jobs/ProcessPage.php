@@ -46,7 +46,25 @@ class ProcessPage implements ShouldQueue
 
     public function handle(coopService $coopApiService)
     {
+        $arrayData = [];
         $data = $coopApiService->page($this->getPageNumber());
+
+        foreach ($data->results as $product) {
+            $imageUrl = $product->images[0]->productimage;
+            $arrayData   = [
+                'name' => $product->name,
+                'content_quantity' => $product->content_quantity,
+                'weight_count_unit' => $product->weight_count_unit,
+                'measure_unit' => $product->measure_unit,
+                'brand_name' => $product->brand_name,
+                'sell_price' => $product->sell_price,
+                'productimage_url' => $imageUrl,
+
+            ];
+            ProcessArray::dispatch($arrayData);
+
+        };
+
 
 
     }
