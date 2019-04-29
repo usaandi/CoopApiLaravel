@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Services\CentralService;
 use App\Services\coopService;
 use Illuminate\Support\ServiceProvider;
 
@@ -16,6 +17,9 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->app->bind(coopService::class, function () {
             return new coopService();
+        });
+        $this->app->bind(CentralService::class, function () {
+            return new CentralService();
         });
     }
 

@@ -47,14 +47,13 @@ class Controller extends BaseController
     {
         $data = $coopService->page($this->getCurrentPage());
 
-
         $itemCount = $data->count;
         $perPage = count($data->results);
         $maxPage = (int)ceil($itemCount / $perPage);
-
         if ($maxPage !== null) {
-            for ($i = 1; $i <= $maxPage; $i++) {
+            for ($i = 1; $i <=1; $i++) {
                 $this->setCurrentPage($i);
+
                 ProcessPage::dispatch($this->getCurrentPage());
             }
         }

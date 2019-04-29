@@ -2,12 +2,12 @@
 
 namespace App\Jobs;
 
+use App\Services\CentralService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
-use GuzzleHttp\Client;
 
 /**
  * Class ProcessArray
@@ -41,14 +41,16 @@ class ProcessArray implements ShouldQueue
     {
         return $this->data;
     }
+
     /**
      * Execute the job.
      *
+     * @param CentralService $centralService
      * @return void
      */
-    public function handle()
+    public function handle(CentralService $centralService)
     {
-        dd($this->getData());
+        $centralService->handle($this->getData());
 
     }
 }

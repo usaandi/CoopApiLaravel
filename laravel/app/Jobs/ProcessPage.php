@@ -49,6 +49,7 @@ class ProcessPage implements ShouldQueue
         $arrayData = [];
         $data = $coopApiService->page($this->getPageNumber());
 
+
         foreach ($data->results as $product) {
             $imageUrl = $product->images[0]->productimage;
             $arrayData   = [
@@ -61,6 +62,7 @@ class ProcessPage implements ShouldQueue
                 'productimage_url' => $imageUrl,
 
             ];
+
             ProcessArray::dispatch($arrayData);
 
         };
