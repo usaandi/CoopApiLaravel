@@ -36,7 +36,6 @@ class coopService
     public function page($pageNumber)
     {
         $data = $this->getPageData($pageNumber);
-
         if ($data !== null) {
             return \GuzzleHttp\json_decode($data);
         }
@@ -60,6 +59,7 @@ class coopService
     protected function storeCache($page, $data)
     {
         Cache::put($page, $data, now()->addHours(1));
+
         return Cache::get($page);
 
     }

@@ -51,8 +51,9 @@ class ProcessPage implements ShouldQueue
 
 
         foreach ($data->results as $product) {
+
             $imageUrl = $product->images[0]->productimage;
-            $arrayData   = [
+            $arrayData = [
                 'name' => $product->name,
                 'content_quantity' => $product->content_quantity,
                 'weight_count_unit' => $product->weight_count_unit,
@@ -62,11 +63,9 @@ class ProcessPage implements ShouldQueue
                 'productimage_url' => $imageUrl,
 
             ];
-
             ProcessArray::dispatch($arrayData);
 
         };
-
 
 
     }
