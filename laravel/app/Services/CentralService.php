@@ -9,7 +9,6 @@ class CentralService
 {
 
     protected $client;
-    protected $data;
 
     public function __construct()
     {
@@ -19,8 +18,12 @@ class CentralService
 
     public function handle($pageData)
     {
+
+        $jsonData = json_encode($pageData);
         var_dump(json_encode($pageData));
-        $this->data = $pageData;
+        $request =$this->client->request('POST', '/add', ['json' =>  $pageData ]);
+        echo $request;
+        /*  var_dump($request);*/
 
     }
 }

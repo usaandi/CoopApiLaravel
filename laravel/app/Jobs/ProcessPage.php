@@ -60,7 +60,7 @@ class ProcessPage implements ShouldQueue
                 'measure_unit' => $product->measure_unit,
                 'brand_name' => $product->brand_name,
                 'sell_price' => $product->sell_price,
-                'productimage_url' => $imageUrl,
+                'productimage_url' => 'https://ecoop.ee'.$imageUrl,
 
             ];
             ProcessArray::dispatch($arrayData);
