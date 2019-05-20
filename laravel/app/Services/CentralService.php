@@ -9,10 +9,11 @@ class CentralService
 {
 
     protected $client;
+    const KUB_BASE_URI = '35.205.172.130';
 
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => 'http://192.168.99.100:3000']);
+        $this->client = new Client(['base_uri' => 'https://' . self::KUB_BASE_URI, 'verify' => false]);
 
     }
 
@@ -21,8 +22,8 @@ class CentralService
 
         $jsonData = json_encode($pageData);
 
-        /*$request =$this->client->request('POST', '/add', ['json' =>  $pageData ]);*/
-        echo $jsonData;
+        $request = $this->client->request('POST', '/add', ['json' => $pageData]);
+        /*dump($request);*/
         /*  var_dump($request);*/
 
     }
