@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Jobs\ProcessPage;
-use App\Services\coopService;
+use App\Services\CoopService;
 use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -43,7 +43,7 @@ class Controller extends BaseController
     }
 
 
-    public function pageInfo(coopService $coopService)
+    public function pageInfo(CoopService $coopService)
     {
         $data = $coopService->page($this->getCurrentPage());
 

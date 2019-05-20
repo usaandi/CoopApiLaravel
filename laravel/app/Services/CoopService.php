@@ -8,7 +8,7 @@
 
 namespace App\Services;
 
-
+use GuzzleHttp\Psr7\Request;
 use GuzzleHttp\Client;
 
 use Illuminate\Support\Facades\Cache;
@@ -17,12 +17,13 @@ use Illuminate\Support\Facades\Cache;
  * Class coopService
  * @package App\Services
  */
-class coopService
+class CoopService
 {
     /**
      * @var Client
      */
     protected $client;
+    const BASE_URI = "ecoop.ee";
 
     /**
      * coopService constructor.
@@ -30,7 +31,8 @@ class coopService
      */
     public function __construct()
     {
-        $this->client = new Client(['base_uri' => 'https://ecoop.ee/api/v1/products']);
+        
+        $this->client = new Client(['base_uri' => 'https://' . self::BASE_URI . '/api/v1/products']);
     }
 
     public function page($pageNumber)
@@ -55,6 +57,7 @@ class coopService
         return null;
 
     }
+
 
     protected function storeCache($page, $data)
     {

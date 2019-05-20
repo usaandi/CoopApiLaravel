@@ -20,9 +20,9 @@ class CentralService
     {
 
         $jsonData = json_encode($pageData);
-        var_dump(json_encode($pageData));
-        $request =$this->client->request('POST', '/add', ['json' =>  $pageData ]);
-        echo $request;
+
+        /*$request =$this->client->request('POST', '/add', ['json' =>  $pageData ]);*/
+        echo $jsonData;
         /*  var_dump($request);*/
 
     }

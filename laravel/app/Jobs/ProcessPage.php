@@ -2,7 +2,7 @@
 
 namespace App\Jobs;
 
-use App\Services\coopService;
+use App\Services\CoopService;
 use Illuminate\Bus\Queueable;
 use Illuminate\Queue\SerializesModels;
 use Illuminate\Queue\InteractsWithQueue;
@@ -44,7 +44,7 @@ class ProcessPage implements ShouldQueue
     }
 
 
-    public function handle(coopService $coopApiService)
+    public function handle(CoopService $coopApiService)
     {
         $arrayData = [];
         $data = $coopApiService->page($this->getPageNumber());
@@ -60,7 +60,7 @@ class ProcessPage implements ShouldQueue
                 'measure_unit' => $product->measure_unit,
                 'brand_name' => $product->brand_name,
                 'sell_price' => $product->sell_price,
-                'productimage_url' => 'https://ecoop.ee'.$imageUrl,
+                'productimage_url' => CoopService::BASE_URI . $imageUrl,
 
             ];
             ProcessArray::dispatch($arrayData);
