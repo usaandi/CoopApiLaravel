@@ -20,11 +20,10 @@ class CentralService
     public function handle($pageData)
     {
 
-        $jsonData = json_encode($pageData);
-
+        /*$jsonData = json_encode($pageData);*/
         $request = $this->client->request('POST', '/add', ['json' => $pageData]);
-        /*dump($request);*/
-        /*  var_dump($request);*/
+        dump($request);
+
 
     }
 }

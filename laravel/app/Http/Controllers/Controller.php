@@ -14,16 +14,16 @@ class Controller extends BaseController
 {
     use AuthorizesRequests, DispatchesJobs, ValidatesRequests;
 
-    protected $currentPage;
+    protected $currentPage = 1;
 
 
     /**
      * Controller constructor.
      * @param int $currentPage
      */
-    public function __construct(int $currentPage = 1)
+    public function __construct()
     {
-        $this->currentPage = $currentPage;
+
     }
 
     /**
@@ -45,16 +45,16 @@ class Controller extends BaseController
 
     public function pageInfo(CoopService $coopService)
     {
-        $data = $coopService->page($this->getCurrentPage());
+        $data = $coopService->page($this->currentPage);
 
         $itemCount = $data->count;
         $perPage = count($data->results);
         $maxPage = (int)ceil($itemCount / $perPage);
         if ($maxPage !== null) {
-            for ($i = 1; $i <= 1; $i++) {
-                $this->setCurrentPage($i);
+            for ($i = $this->currentPage; $i <= $maxPage; $i++) {
 
-                ProcessPage::dispatch($this->getCurrentPage());
+
+                ProcessPage::dispatch($this->currentPage);
             }
         }
 
